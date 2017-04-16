@@ -21,10 +21,15 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Trang Chủ", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Sách", "Index", "Book")</li>
+                    <li>@Html.ActionLink("Tác giả", "Index", "Author")</li>
+                    <li>@Html.ActionLink("Nhà xuất bản", "Index", "Publisher")</li>
                 </ul>
                 <ul class="nav navbar-nav pull-right">
-                    <li>@Html.ActionLink("Đăng nhập", "Login", "Librarian")</li>
-                    <li>@Html.ActionLink("Đăng kí", "Register", "Librarian")</li>
+                    <li>
+                        @ViewBag.Librarian.FirstName
+                    </li>
+                    <li>@Html.ActionLink("Đăng xuất", "Index", "Home")</li>
                 </ul>
             </div>
         </div>
