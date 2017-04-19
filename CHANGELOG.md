@@ -1,3 +1,9 @@
+[0.3.0] 20/04/2016
+
+## Added 
+- Index, Create, Edit, Delete Author
+
+
 [0.2.0] 19/04/2016
 
 ## Added 
