@@ -1,3 +1,8 @@
+[0.5.0] 20/04/2016
+
+## Added 
+- Index, Create, Edit, Delete Category
+
 [0.4.0] 20/04/2016
 
 ## Added 

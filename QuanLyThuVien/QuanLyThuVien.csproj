@@ -157,6 +157,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AuthorController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LibrarianController.cs" />
     <Compile Include="Controllers\PublisherController.cs" />
@@ -167,6 +168,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Author.cs" />
+    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Librarian.cs" />
     <Compile Include="Models\Publisher.cs" />
     <Compile Include="Models\User.cs" />
@@ -233,6 +235,10 @@
     <Content Include="Views\Publisher\Create.cshtml" />
     <Content Include="Views\Publisher\Edit.cshtml" />
     <Content Include="Views\Publisher\Delete.cshtml" />
+    <Content Include="Views\Category\Index.cshtml" />
+    <Content Include="Views\Category\Create.cshtml" />
+    <Content Include="Views\Category\Edit.cshtml" />
+    <Content Include="Views\Category\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

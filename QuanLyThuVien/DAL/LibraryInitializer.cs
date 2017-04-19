@@ -42,6 +42,17 @@ namespace QuanLyThuVien.DAL {
             publishers.ForEach(publisher => context.Publishers.Add(publisher));
             context.SaveChanges();
 
+            var categories = new List<Category> {
+                new Category {
+                    Name = "Văn học trong nước", Description = "Tuyển tập các tác phẩm văn học nổi tiếng trong nước"
+                },
+                new Category {
+                    Name = "Tiểu thuyết lãng mạn", Description = "Tuyển tập các tác phẩm văn học nổi tiếng trong và ngoài nước"
+                }
+            };
+            categories.ForEach(category => context.Categories.Add(category));
+            context.SaveChanges();
+
             base.Seed(context);
         }
     }
