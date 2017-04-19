@@ -1,3 +1,8 @@
+[0.4.0] 20/04/2016
+
+## Added 
+- Index, Create, Edit, Delete Publisher
+
 [0.3.0] 20/04/2016
 
 ## Added 
