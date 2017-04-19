@@ -1,7 +1,9 @@
 ﻿@model QuanLyThuVien.Models.User
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Create";
+    ViewBag.UserName = Session["Name"];
+    Layout = "~/Views/Shared/_AfterLoginLayoutPage.cshtml";
 }
 
 <h2>Edit</h2>
@@ -100,4 +102,6 @@
     @Html.ActionLink("Back to List", "Index")
 </div>
 
-
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

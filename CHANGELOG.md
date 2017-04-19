@@ -1,6 +1,10 @@
-[0.2] 19/04/2016
+[0.2.0] 19/04/2016
 
-## Added Index, Create, Edit, Delete User
+## Added 
+- Index, Create, Edit, Delete User
+
+## Changed
+- Change Layout of View after login success
 
 
 [0.1.1] 19/04/2016
