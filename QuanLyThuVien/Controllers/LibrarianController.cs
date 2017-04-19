@@ -26,7 +26,11 @@ namespace QuanLyThuVien.Controllers
         }
 
         public ActionResult Register() {
-            return View();
+            if (Session["ID"] == null) {
+                return View();
+            } else {
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         [HttpPost]
@@ -44,6 +48,8 @@ namespace QuanLyThuVien.Controllers
 
         //Login
         public ActionResult Login() {
+            // Clear Username and Password textBox
+            ModelState.Clear();
             return View();
         }
 
@@ -55,6 +61,7 @@ namespace QuanLyThuVien.Controllers
                     if (user != null) {
                         Session["ID"] = user.ID.ToString();
                         Session["UID"] = user.UID.ToString();
+                        Session["Name"] = user.FirstName.ToString() + user.LastName.ToString();
                         return RedirectToAction("Index", "Home");
                     }
                     else {
@@ -74,6 +81,18 @@ namespace QuanLyThuVien.Controllers
                 return RedirectToAction("Login");
             }
         }
+
+        /// <summary>
+        /// Logout 
+        /// Reset Session to null
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult Logout() {
+            Session.Clear();
+            return RedirectToAction("Index", "Home");
+        }
+
 
         // Edit libraian
         public ActionResult Edit(int ?id) { 
@@ -97,5 +116,22 @@ namespace QuanLyThuVien.Controllers
             return View(librarian);
         }
 
+        //Delete librarian
+        public ActionResult Delete(int ?id) {
+            Librarian libs = db.Librarians.Find(id);
+            return View(libs);
+        }
+
+        [HttpPost]
+        public ActionResult Delete(Librarian librarian, int ?id) {
+            Librarian libs = db.Librarians.Find(id);
+            if (libs != null && Session["ID"] != null) {
+                db.Librarians.Remove(libs);
+                db.SaveChanges();
+            } else {
+                return HttpNotFound();
+            }
+            return RedirectToAction("Index", "Librarian");
+        }
     }
 }

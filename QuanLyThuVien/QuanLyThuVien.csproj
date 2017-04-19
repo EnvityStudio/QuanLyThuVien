@@ -214,6 +214,7 @@
     <Content Include="Views\Librarian\Index.cshtml" />
     <Content Include="Views\Librarian\Edit.cshtml" />
     <Content Include="Views\Shared\_AfterLoginLayoutPage.cshtml" />
+    <Content Include="Views\Librarian\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

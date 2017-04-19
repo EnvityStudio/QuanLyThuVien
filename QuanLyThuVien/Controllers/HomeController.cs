@@ -14,9 +14,8 @@ namespace QuanLyThuVien.Controllers {
 
         public ActionResult Index() {
             if (Session["ID"] != null) {
-                var id = Int32.Parse(Session["ID"].ToString());
-                Librarian user = db.Librarians.Find(id);
-                ViewBag.Librarian = user;
+                var userName = Session["name"];
+                ViewBag.UserName = userName;
             }
             return View();
         }

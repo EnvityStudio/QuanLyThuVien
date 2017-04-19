@@ -21,15 +21,19 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Trang Chủ", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Sách", "Index", "Book")</li>
-                    <li>@Html.ActionLink("Tác giả", "Index", "Author")</li>
-                    <li>@Html.ActionLink("Nhà xuất bản", "Index", "Publisher")</li>
+                    <li>@Html.ActionLink("Thủ thư", "Index", "Librarian")</li>
+                    <li>@Html.ActionLink("Độc giả", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Sách", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Tác giả", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Nhà xuất bản", "Index", "Home")</li>
                 </ul>
                 <ul class="nav navbar-nav pull-right">
                     <li>
-                        @ViewBag.Librarian.FirstName
+                        <a>@ViewBag.UserName</a>
                     </li>
-                    <li>@Html.ActionLink("Đăng xuất", "Index", "Home")</li>
+                    <li>
+                        @Html.ActionLink("Đăng xuất", "Logout", "Librarian")
+                    </li>
                 </ul>
             </div>
         </div>
