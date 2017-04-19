@@ -13,6 +13,7 @@ namespace QuanLyThuVien.Controllers
     public class LibrarianController : Controller
     {
         private LibraryContext db = new LibraryContext();
+
         // GET: Librarian
         public ActionResult Index()
         {
@@ -25,6 +26,7 @@ namespace QuanLyThuVien.Controllers
             }
         }
 
+        // GET Librarian Create
         public ActionResult Register() {
             if (Session["ID"] == null) {
                 return View();
@@ -33,6 +35,7 @@ namespace QuanLyThuVien.Controllers
             }
         }
 
+        // POST Librarian Create
         [HttpPost]
         public ActionResult Register(Librarian librarian) {
             if (ModelState.IsValid) {
@@ -46,13 +49,14 @@ namespace QuanLyThuVien.Controllers
             return RedirectToAction("Login");
         }
 
-        //Login
+        // GET Login Librarian
         public ActionResult Login() {
             // Clear Username and Password textBox
             ModelState.Clear();
             return View();
         }
 
+        // POST Login Librarian
         [HttpPost]
         public ActionResult Login(Librarian librarian) {
             using (LibraryContext db = new LibraryContext()) {
@@ -82,19 +86,12 @@ namespace QuanLyThuVien.Controllers
             }
         }
 
-        /// <summary>
-        /// Logout 
-        /// Reset Session to null
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
         public ActionResult Logout() {
             Session.Clear();
             return RedirectToAction("Index", "Home");
         }
 
-
-        // Edit libraian
+        // Edit Librarian
         public ActionResult Edit(int ?id) { 
             if (id == null) {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);

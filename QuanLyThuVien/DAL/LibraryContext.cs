@@ -11,6 +11,7 @@ namespace QuanLyThuVien.DAL {
         public LibraryContext() : base("LibraryContext") { }
 
         public DbSet<Librarian> Librarians { get; set; }
+        public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder) {
             base.OnModelCreating(modelBuilder);
