@@ -13,7 +13,19 @@ namespace QuanLyThuVien.DAL {
                     Password ="123", ConfirmPassword="123", Address="Cầu giấy", Email = "admin@gmail.com" },
                 new Librarian {
                     UID = "huyenanh", FirstName="Huyền", LastName="Anh", Gender="Female",
-                    Password ="123", ConfirmPassword="123", Address="Nghĩa Đô" , Email = "huyenanh@gmail.com"}
+                    Password ="123", ConfirmPassword="123", Address="Nghĩa Đô" , Email = "huyenanh@gmail.com"},
+                new Librarian {
+                    UID = "nguyenanh", FirstName="Nguyễn", LastName="Anh", Gender="Male",
+                    Password ="123", ConfirmPassword="123", Address="Láng" , Email = "nguyenanh@gmail.com", Phone="09882839182"},
+                new Librarian {
+                    UID = "lamtran", FirstName="Lâm", LastName="Trần", Gender="Male",
+                    Password ="123", ConfirmPassword="123", Address="Ngã tư sở" , Email = "lammtran.12@gmail.com", Phone="09882839182"},
+                new Librarian {
+                    UID = "vuanhminh", FirstName="Vũ anh", LastName="Minh", Gender="Male",
+                    Password ="123", ConfirmPassword="123", Address="Hà Đông" , Email = "vuanhminh@gmail.com", Phone="09882839182"},
+                new Librarian {
+                    UID = "tulong", FirstName="Tự", LastName="Long", Gender="Male",
+                    Password ="123", ConfirmPassword="123", Address="Trường Chinh" , Email = "tulong.haihuoc@gmail.com", Phone="09882839182"}
             };
             librarians.ForEach(libs => context.Librarians.Add(libs));
             context.SaveChanges();
@@ -51,6 +63,20 @@ namespace QuanLyThuVien.DAL {
                 }
             };
             categories.ForEach(category => context.Categories.Add(category));
+            context.SaveChanges();
+
+            var books = new List<Book> {
+                new Book {
+                    Name = "Tấm Cám", PublisherID = 1, Description="Truyện cổ tích Việt Nam", Price=30000
+                }, 
+                new Book {
+                    Name = "Thạch sanh", PublisherID = 1, Description="Truyện cổ tích Việt Nam", Price=30000
+                }, 
+                new Book {
+                    Name = "War and Peace", PublisherID = 2, Description="Truyện kinh điển văn học Nga", Price=180000
+                }
+            };
+            books.ForEach(book => context.Books.Add(book));
             context.SaveChanges();
 
             base.Seed(context);

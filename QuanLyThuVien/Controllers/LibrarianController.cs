@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 
 namespace QuanLyThuVien.Controllers
 {
@@ -15,15 +16,58 @@ namespace QuanLyThuVien.Controllers
         private LibraryContext db = new LibraryContext();
 
         // GET: Librarian
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            if (Session["ID"] != null) {
-                using (LibraryContext db = new LibraryContext()) {
-                    return View(db.Librarians.ToList());
-                }
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.FirstNameSortParm = String.IsNullOrEmpty(sortOrder) ? "firstname_desc" : "";
+            ViewBag.LastNameSortParm = String.IsNullOrEmpty(sortOrder) ? "lastname_desc" : "";
+            ViewBag.UidSortParm = String.IsNullOrEmpty(sortOrder) ? "uid_desc" : "";
+
+            if (searchString != null) {
+                page = 1;
             } else {
-                return RedirectToAction("Login");
+                searchString = currentFilter;
             }
+            ViewBag.CurrentFilter = searchString;
+            /*  
+            By using LINQ to select a list of librarians
+             */
+            var libs = from l in db.Librarians
+                       select l;
+
+            /*
+            This code below is searching for the result of text in search text box
+             */
+            if (!String.IsNullOrEmpty(searchString)) {
+                libs = libs.Where(
+                    l => l.UID.Contains(searchString)
+                    || l.FirstName.Contains(searchString)
+                    || l.FirstName.Contains(searchString)
+                    || l.LastName.Contains(searchString)
+                    || l.Email.Contains(searchString)
+                    || l.Address.Contains(searchString)
+                    || l.Phone.Contains(searchString)
+                );
+            }
+
+            switch (sortOrder) {
+                case "firstname_desc":
+                    libs = libs.OrderByDescending(l => l.FirstName);
+                    break; 
+                case "lastname_desc":
+                    libs = libs.OrderByDescending(l => l.LastName);
+                    break; 
+                case "uid_desc":
+                    libs = libs.OrderByDescending(l => l.UID);
+                    break;
+                default:
+                    libs = libs.OrderBy(l => l.LastName);
+                    break;
+            }
+
+            int pageSize = 3;
+            int pageNumber = (page ?? 1);
+            return View(libs.ToPagedList(pageNumber, pageSize));
         }
 
         // GET Librarian Create

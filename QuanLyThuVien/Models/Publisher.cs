@@ -18,5 +18,7 @@ namespace QuanLyThuVien.Models {
         public string Phone { get; set; }
 
         public string Intro { get; set; }
+
+        public virtual List<Book> Books { get; set; }
     }
 }

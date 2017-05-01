@@ -9,7 +9,7 @@ namespace QuanLyThuVien.Models {
         [Key]
         public int ID { get; set; }
 
-        [Required(ErrorMessage ="Name is required.")]
+        [Required(ErrorMessage ="Name Category is required.")]
         public string Name { get; set; }
 
         public string Description { get; set; }

@@ -1,3 +1,9 @@
+[0.5.1] 01/05/2016
+
+## Added
+- Add Sorting, Filtering and Paging to Librarian 
+
+
 [0.5.0] 20/04/2016
 
 ## Added 
