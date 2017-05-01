@@ -74,6 +74,18 @@ namespace QuanLyThuVien.DAL {
                 }, 
                 new Book {
                     Name = "War and Peace", PublisherID = 2, Description="Truyện kinh điển văn học Nga", Price=180000
+                }, 
+                new Book {
+                    Name = "Catcher in the rye", PublisherID = 2, Description="Truyện lãng mạn", Price=50000
+                }, 
+                new Book {
+                    Name = "AQZ", PublisherID = 1, Description="A classic book of Africa", Price=130000
+                }, 
+                new Book {
+                    Name = "Dế mèn phưu lưu ký", PublisherID = 2, Description="Truyện thiếu nhi của nhà văn Tô Hoài", Price=23000
+                }, 
+                new Book {
+                    Name = "1Q94", PublisherID = 2, Description="Murakami", Price=230000
                 }
             };
             books.ForEach(book => context.Books.Add(book));

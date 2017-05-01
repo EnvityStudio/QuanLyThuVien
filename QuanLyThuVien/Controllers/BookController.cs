@@ -6,6 +6,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using QuanLyThuVien.ViewModels;
 
 namespace QuanLyThuVien.Controllers
 {
@@ -69,5 +70,15 @@ namespace QuanLyThuVien.Controllers
             return RedirectToAction("Index");
         }
 
+        // GET Book Price Group
+        public ActionResult About() {
+            IQueryable<BookPriceGroup> data = from book in db.Books
+                                              group book by book.Price into bookPrice
+                                              select new BookPriceGroup() {
+                                                  Price = bookPrice.Key,
+                                                  PriceCount = bookPrice.Count()
+                                              };
+            return View(data.ToList());
+        }
     }
 }

@@ -1,0 +1,31 @@
+﻿@model IEnumerable<QuanLyThuVien.ViewModels.BookPriceGroup>
+
+@{
+    ViewBag.Title = "Book Price Statistics";
+    ViewBag.UserName = Session["Name"];
+    Layout = "~/Views/Shared/_AfterLoginLayoutPage.cshtml";
+}
+
+<h2>Book Price Statistics</h2>
+
+<table>
+    <tr>
+        <th>
+            Price
+        </th>
+        <th>
+            Count
+        </th>
+    </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @item.PriceCount
+            </td>
+        </tr>
+    }
+</table>
