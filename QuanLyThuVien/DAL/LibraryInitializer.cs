@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 
 namespace QuanLyThuVien.DAL {
-    public class LibraryInitializer : System.Data.Entity.DropCreateDatabaseAlways<LibraryContext>{
+    public class LibraryInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<LibraryContext>{
         protected override void Seed(LibraryContext context) {
             var librarians = new List<Librarian> {
                 new Librarian {
