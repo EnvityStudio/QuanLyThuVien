@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using PagedList;
+using System.Data.Entity.Infrastructure;
 
 namespace QuanLyThuVien.Controllers
 {
@@ -22,7 +23,9 @@ namespace QuanLyThuVien.Controllers
             ViewBag.FirstNameSortParm = String.IsNullOrEmpty(sortOrder) ? "firstname_desc" : "";
             ViewBag.LastNameSortParm = String.IsNullOrEmpty(sortOrder) ? "lastname_desc" : "";
             ViewBag.UidSortParm = String.IsNullOrEmpty(sortOrder) ? "uid_desc" : "";
-
+            /*  
+                If there are no texts to search, page number will set to one
+             */
             if (searchString != null) {
                 page = 1;
             } else {
@@ -30,13 +33,13 @@ namespace QuanLyThuVien.Controllers
             }
             ViewBag.CurrentFilter = searchString;
             /*  
-            By using LINQ to select a list of librarians
+                By using LINQ to select a list of librarians
              */
             var libs = from l in db.Librarians
                        select l;
 
             /*
-            This code below is searching for the result of text in search text box
+                This code below is searching for the result of text in search text box
              */
             if (!String.IsNullOrEmpty(searchString)) {
                 libs = libs.Where(
@@ -135,6 +138,24 @@ namespace QuanLyThuVien.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        // GET: Librarian Create
+        public ActionResult Create() {
+            return View();
+        }
+
+        // POST: Librarian Create
+        [HttpPost]
+        public ActionResult Create(Librarian lib) {
+            if (ModelState.IsValid) {
+                using (LibraryContext db = new LibraryContext()) {
+                    db.Librarians.Add(lib);
+                    db.SaveChanges();
+                }
+                ModelState.Clear();
+            }
+            return RedirectToAction("Index", "Librarian");
+        }
+
         // Edit Librarian
         public ActionResult Edit(int ?id) { 
             if (id == null) {
@@ -166,7 +187,7 @@ namespace QuanLyThuVien.Controllers
         [HttpPost]
         public ActionResult Delete(Librarian librarian, int ?id) {
             Librarian libs = db.Librarians.Find(id);
-            if (libs != null && Session["ID"] != null) {
+            if (libs != null) {
                 db.Librarians.Remove(libs);
                 db.SaveChanges();
             } else {

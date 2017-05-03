@@ -6,6 +6,7 @@
     <title>@ViewBag.Title - Quản lý thư viện</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    <link rel="stylesheet" type="text/css" href="~/Views/Shared/css/layout.css">
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -19,9 +20,6 @@
                 @Html.ActionLink("Quản lý thư viện", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Trang Chủ", "Index", "Home")</li>
-                </ul>
                 <ul class="nav navbar-nav pull-right">
                     <li>@Html.ActionLink("Đăng nhập", "Login", "Librarian")</li>
                     <li>@Html.ActionLink("Đăng kí", "Register", "Librarian")</li>
@@ -31,10 +29,12 @@
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Phần mềm quản lý thư viện</p>
-        </footer>
+        <div class="footer-fixed-bottom">
+            <footer>
+                <hr />
+                <p>@DateTime.Now.Year - Phần mềm quản lý thư viện</p>
+            </footer>
+        </div>
     </div>
 
     @Scripts.Render("~/bundles/jquery")

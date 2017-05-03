@@ -14,6 +14,14 @@ namespace QuanLyThuVien.Models {
         [DisplayName("Publisher")]
         public int PublisherID { get; set; }
 
+        [Required(ErrorMessage ="Category is required.")]
+        [DisplayName("Category")]
+        public int CategoryID { get; set; }
+
+        [Required(ErrorMessage ="Author is required.")]
+        [DisplayName("Author")]
+        public int AuthorID { get; set; }
+
         [Required(ErrorMessage ="Name is required.")]
         public string Name { get; set; }
 
@@ -22,5 +30,9 @@ namespace QuanLyThuVien.Models {
         public decimal Price { get; set; }
 
         public virtual Publisher Publisher { get; set; }
+
+        public virtual Category Category { get; set; }
+
+        public virtual Author Author { get; set; }
     }
 }

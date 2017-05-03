@@ -15,7 +15,7 @@
 </p>
 
 @* Search by name *@
-@using (Html.BeginForm("Index", "Student", FormMethod.Get)) {
+@using (Html.BeginForm("Index", "Librarian", FormMethod.Get)) {
     <p>
         Search: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
         <input type="submit" value="Search" />

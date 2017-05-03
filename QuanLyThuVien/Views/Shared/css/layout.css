@@ -1,0 +1,7 @@
+﻿body {
+}
+
+.footer-fixed-bottom {
+    bottom: 0;
+    position: fixed;
+}

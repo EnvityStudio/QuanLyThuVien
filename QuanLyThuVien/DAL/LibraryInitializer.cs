@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 
 namespace QuanLyThuVien.DAL {
-    public class LibraryInitializer : System.Data.Entity.DropCreateDatabaseIfModelChanges<LibraryContext>{
+    public class LibraryInitializer : System.Data.Entity.DropCreateDatabaseAlways<LibraryContext>{
         protected override void Seed(LibraryContext context) {
             var librarians = new List<Librarian> {
                 new Librarian {
@@ -30,6 +30,24 @@ namespace QuanLyThuVien.DAL {
             librarians.ForEach(libs => context.Librarians.Add(libs));
             context.SaveChanges();
 
+            var users = new List<User> {
+                new User {
+                    UID = "khanhlq", FirstName = "Le", LastName="Khanh", Email="khanhle@gmail.com", 
+                    Gender="male", Address="Thanh Xuan", Phone="0192318239", Password="khanhlq", ConfirmPassword="khanhlq"
+                }, 
+                new User {
+                    UID = "namle", FirstName = "Nam", LastName="Le", Email="namle@gmail.com", 
+                    Gender="male", Address="Cau giay", Phone="0983812388", Password="name123", ConfirmPassword="name123"
+                }, 
+                new User {
+                    UID = "dongson", FirstName = "Dong", LastName="Son", Email="dongson@gmail.com", 
+                    Gender="male", Address="Hoang Hoa", Phone="0983892388", Password="123456", ConfirmPassword="123456"
+                }
+            };
+
+            users.ForEach(user => context.Users.Add(user));
+            context.SaveChanges();
+
             var authors = new List<Author> {
                 new Author {
                     FirstName = "Viet Thanh", LastName = "Nguyen", Gender = "male",
@@ -38,6 +56,14 @@ namespace QuanLyThuVien.DAL {
                 new Author {
                     FirstName = "J.r", LastName = "Rowling", Gender = "female",
                     BirthDay = "1970", Country="Bristain", Bio = @"Joanne 'Jo' Rowling, OBE, FRSL, pen names J. K. Rowling and Robert Galbraith, is a British novelist, screenwriter and film producer best known as the author of the Harry Potter fantasy series"
+                },
+                new Author {
+                    FirstName = "Tô", LastName = "Hoài", Gender = "male",
+                    BirthDay = "1940", Country="VietNam", Bio = @"Tô Hoài was a Vietnamese writer. Some of his works have been translated into foreign languages. He won the Ho Chi Minh Prize for Literature in 1996."
+                },
+                new Author {
+                    FirstName = "Nam", LastName = "Cao", Gender = "male",
+                    BirthDay = "1920", Country="VietNam", Bio = @"Trần Hữu Tri (1915—1951), commonly known by his pseudonym Nam Cao, was a Vietnamese short story writer and novelist. His works generally received high."
                 }
             };
             authors.ForEach(author => context.Authors.Add(author));
@@ -49,7 +75,11 @@ namespace QuanLyThuVien.DAL {
                 },
                 new Publisher {
                     Name= "Nhà xuất bản Kim Đồng", Address = "91 Trần Thái Tông", Phone = "041823198", Intro="Nhà xuất bản Kim Đồng trực thuộc Trung ương Đoàn TNCS Hồ Chí Minh là Nhà xuất bản tổng hợp có chức năng xuất bản sách và văn hóa phẩm phục vụ thiếu"
+                },
+                new Publisher {
+                    Name= "Nhà xuất bản Nhã Nam", Address = "Nguyễn Thái học", Phone = "041823198", Intro="Nhà xuất bản Kim Đồng trực thuộc Trung ương Đoàn TNCS Hồ Chí Minh là Nhà xuất bản tổng hợp có chức năng xuất bản sách và văn hóa phẩm phục vụ thiếu"
                 }
+
             };
             publishers.ForEach(publisher => context.Publishers.Add(publisher));
             context.SaveChanges();
@@ -60,32 +90,44 @@ namespace QuanLyThuVien.DAL {
                 },
                 new Category {
                     Name = "Tiểu thuyết lãng mạn", Description = "Tuyển tập các tác phẩm văn học nổi tiếng trong và ngoài nước"
-                }
+                },
+                new Category {
+                    Name = "Truyện thiếu nhi", Description = "Tuyển tập truyện thiếu nhi nổi tiếng trong nước"
+                },
+                new Category {
+                    Name = "Truyện trinh thám", Description = "Tuyển tập truyện trinh thám nổi tiếng trong nước"
+                },
+                new Category {
+                    Name = "Truyện khoa học viễn tưởng", Description = "Tuyển tập truyện thiếu nhi nổi tiếng trong nước"
+                },
+                new Category {
+                    Name = "Truyện ngôn tình", Description = "Tuyển tập truyện thiếu nhi nổi tiếng trong nước"
+                },
             };
             categories.ForEach(category => context.Categories.Add(category));
             context.SaveChanges();
 
             var books = new List<Book> {
                 new Book {
-                    Name = "Tấm Cám", PublisherID = 1, Description="Truyện cổ tích Việt Nam", Price=30000
-                }, 
+                    Name = "Tấm Cám", PublisherID = 1, CategoryID=3, AuthorID=1,  Description="Truyện cổ tích Việt Nam", Price=30000
+                },
                 new Book {
-                    Name = "Thạch sanh", PublisherID = 1, Description="Truyện cổ tích Việt Nam", Price=30000
-                }, 
+                    Name = "Thạch sanh", PublisherID = 1, CategoryID=3, AuthorID=2, Description="Truyện cổ tích Việt Nam", Price=30000
+                },
                 new Book {
-                    Name = "War and Peace", PublisherID = 2, Description="Truyện kinh điển văn học Nga", Price=180000
-                }, 
+                    Name = "War and Peace", PublisherID = 2, CategoryID=2 , AuthorID=2, Description="Truyện kinh điển văn học Nga", Price=180000
+                },
                 new Book {
-                    Name = "Catcher in the rye", PublisherID = 2, Description="Truyện lãng mạn", Price=50000
-                }, 
+                    Name = "Catcher in the rye", PublisherID = 2, CategoryID=2, AuthorID=3, Description="Truyện lãng mạn", Price=50000
+                },
                 new Book {
-                    Name = "AQZ", PublisherID = 1, Description="A classic book of Africa", Price=130000
-                }, 
+                    Name = "AQZ", PublisherID = 1, CategoryID=4, AuthorID=2 ,Description="A classic book of Africa", Price=130000
+                },
                 new Book {
-                    Name = "Dế mèn phưu lưu ký", PublisherID = 2, Description="Truyện thiếu nhi của nhà văn Tô Hoài", Price=23000
-                }, 
+                    Name = "Dế mèn phưu lưu ký", PublisherID = 2, CategoryID=2 , AuthorID=2 ,  Description="Truyện thiếu nhi của nhà văn Tô Hoài", Price=23000
+                },
                 new Book {
-                    Name = "1Q94", PublisherID = 2, Description="Murakami", Price=230000
+                    Name = "1Q94", PublisherID = 2, CategoryID=6,  AuthorID=3, Description="Murakami", Price=230000
                 }
             };
             books.ForEach(book => context.Books.Add(book));

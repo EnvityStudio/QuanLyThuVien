@@ -171,6 +171,7 @@
     <Compile Include="Controllers\LibrarianController.cs" />
     <Compile Include="Controllers\PublisherController.cs" />
     <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="DAL\LibraryConfiguration.cs" />
     <Compile Include="DAL\LibraryContext.cs" />
     <Compile Include="DAL\LibraryInitializer.cs" />
     <Compile Include="Global.asax.cs">
@@ -210,6 +211,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Views\Shared\css\layout.css" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -256,6 +258,7 @@
     <Content Include="Views\Book\Edit.cshtml" />
     <Content Include="Views\Book\Delete.cshtml" />
     <Content Include="Views\Book\About.cshtml" />
+    <Content Include="Views\Librarian\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
