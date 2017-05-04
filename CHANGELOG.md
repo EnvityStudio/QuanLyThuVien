@@ -1,3 +1,8 @@
+[0.6.0] 03/05/2016
+
+## Added
+- Foreigner key in Book
+
 [0.5.1] 01/05/2016
 
 ## Added

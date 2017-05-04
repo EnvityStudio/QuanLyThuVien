@@ -8,7 +8,7 @@
     @Scripts.Render("~/bundles/modernizr")
     <link rel="stylesheet" type="text/css" href="~/Views/Shared/css/layout.css">
 </head>
-<body>
+<body background="~/Content/img/background.jpg">
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -29,12 +29,10 @@
     </div>
     <div class="container body-content">
         @RenderBody()
-        <div class="footer-fixed-bottom">
-            <footer>
-                <hr />
-                <p>@DateTime.Now.Year - Phần mềm quản lý thư viện</p>
-            </footer>
-        </div>
+        <footer>
+            <hr />
+            <p>@DateTime.Now.Year - Phần mềm quản lý thư viện</p>
+        </footer>
     </div>
 
     @Scripts.Render("~/bundles/jquery")
