@@ -7,14 +7,77 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using QuanLyThuVien.ViewModels;
+using PagedList;
 
 namespace QuanLyThuVien.Controllers {
     public class BookController : Controller {
         private LibraryContext db = new LibraryContext();
         // GET: Book
-        public ActionResult Index() {
-            var books = db.Books.ToList();
-            return View(books);
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page) {
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.PublisherSortParm = String.IsNullOrEmpty(sortOrder) ? "publisher_desc" : "";
+            ViewBag.categorySortParm = String.IsNullOrEmpty(sortOrder) ? "category_desc" : "";
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewBag.NameAuthorSortParm = String.IsNullOrEmpty(sortOrder) ? "name_author_desc" : "";
+            ViewBag.PriceSortParm = String.IsNullOrEmpty(sortOrder) ? "price_desc" : "";
+            /*  
+                If there are no texts to search, page number will set to one
+             */
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            ViewBag.CurrentFilter = searchString;
+            /*  
+                By using LINQ to select a list of librarians
+             */
+            var libs = from l in db.Books
+                       select l;
+
+            /*
+                This code below is searching for the result of text in search text box
+             */
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                libs = libs.Where(
+                    l => l.Name.Contains(searchString)
+                    || l.Author.FirstName.Contains(searchString)
+                    || l.Publisher.Name.Contains(searchString)
+                    || l.Description.Contains(searchString)
+                    || l.Category.Name.Contains(searchString)
+                    || l.Price.ToString().Contains(searchString)
+                );
+            }
+
+            switch (sortOrder)
+            {
+                case "publisher_desc":
+                    libs = libs.OrderByDescending(l => l.Publisher.Name);
+                    break;
+                case "category_desc":
+                    libs = libs.OrderByDescending(l => l.Category.Name);
+                    break;
+                case "name_desc":
+                    libs = libs.OrderByDescending(l => l.Name);
+                    break;
+                case "price_desc":
+                    libs = libs.OrderByDescending(l => l.Price);
+                    break;
+                case "name_author_desc":
+                    libs = libs.OrderByDescending(l => l.Author.LastName);
+                    break;
+                default:
+                    libs = libs.OrderBy(l => l.Name);
+                    break;
+            }
+
+            int pageSize = 10;
+            int pageNumber = (page ?? 1);
+            return View(libs.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: Book Create

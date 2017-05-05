@@ -1,4 +1,5 @@
-﻿@model IEnumerable<QuanLyThuVien.Models.Book>
+﻿@model PagedList.IPagedList<QuanLyThuVien.Models.Book>
+@using PagedList.Mvc;
 
 @{
     ViewBag.Title = "Index";
@@ -6,13 +7,22 @@
     Layout = "~/Views/Shared/_AfterLoginLayoutPage.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Book</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+@using (Html.BeginForm("Index", "Book", FormMethod.Get))
+{
+    <p>
+        Search: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+}
+
 <table class="table">
-    <tr>
+    @*<tr>
         <th>
             @Html.DisplayNameFor(model => model.Publisher)
         </th>
@@ -32,8 +42,28 @@
             @Html.DisplayNameFor(model => model.Price)
         </th>
         <th></th>
+    </tr>*@
+    <tr>
+        <th>
+            @Html.ActionLink("Publisher", "Index", new { sortOrder = ViewBag.PublisherSortParm, currentFitler = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            @Html.ActionLink("Category", "Index", new { sortOrder = ViewBag.categorySortParm, currentFitler = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            @Html.ActionLink("Author", "Index", new { sortOrder = ViewBag.NameAuthorSortParm, currentFitler = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm, currentFitler = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            @Html.ActionLink("Description", "Index")
+        </th>
+        <th>
+            @Html.ActionLink("Price", "Index", new { sortOrder = ViewBag.PriceSortParm, currentFitler = ViewBag.CurrentFilter })
+        </th>
+        <th></th>
     </tr>
-
 @foreach (var item in Model) {
     <tr>
         <td>
@@ -43,7 +73,7 @@
             @Html.DisplayFor(modelItem => item.Category.Name)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Author.FirstName)
+            @Html.DisplayFor(modelItem => item.Author.LastName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Name)
@@ -62,3 +92,7 @@
 }
 
 </table>
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
