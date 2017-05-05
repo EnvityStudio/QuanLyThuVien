@@ -1,4 +1,5 @@
-﻿@model IEnumerable<QuanLyThuVien.Models.Author>
+﻿@model PagedList.IPagedList<QuanLyThuVien.Models.Author>
+@using PagedList.Mvc;
 
 @{
     ViewBag.Title = "Index";
@@ -11,8 +12,17 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+@* Search by name *@
+@using (Html.BeginForm("Index", "Author", FormMethod.Get))
+{
+    <p>
+        Search: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+}
+
 <table class="table">
-    <tr>
+    @*<tr>
         <th>
             @Html.DisplayNameFor(model => model.FirstName)
         </th>
@@ -30,6 +40,28 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Country)
+        </th>
+        <th></th>
+    </tr>*@
+
+    <tr>
+        <th>
+            @Html.ActionLink("First Name", "Index", new { sortOrder = ViewBag.FirstNameSortParm, currentFitler = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.LastNameSortParm, currentFitler = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            @Html.ActionLink("Gender", "Index", new { sortOrder = ViewBag.GenderSortParm, currentFitler = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            @Html.ActionLink("Bio", "Index")
+        </th>
+        <th>
+            @Html.ActionLink("BirthDay", "Index")
+        </th>
+        <th>
+            @Html.ActionLink("Country", "Index", new { sortOrder = ViewBag.CountrySortParm, currentFitler = ViewBag.CurrentFilter })
         </th>
         <th></th>
     </tr>
@@ -62,3 +94,8 @@
 }
 
 </table>
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
