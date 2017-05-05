@@ -1,0 +1,61 @@
+﻿@model IEnumerable<QuanLyThuVien.Models.Order>
+
+@{
+    ViewBag.Title = "Index";
+    ViewBag.UserName = Session["Name"];
+    Layout = "~/Views/Shared/_AfterLoginLayoutPage.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Book)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BorrowedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ExpiredDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Number)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Book.Name)
+        </td>
+        <td>
+            @{ 
+                var userFullName = item.User.FirstName + " " + item.User.LastName;
+            }
+            @Html.DisplayFor(modelItem => @userFullName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BorrowedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExpiredDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Number)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

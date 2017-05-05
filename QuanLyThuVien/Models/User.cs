@@ -36,5 +36,7 @@ namespace QuanLyThuVien.Models {
         public string Address { get; set; }
 
         public string Phone { get; set; }
+
+        public virtual List<Order> Orders { get; set; }
     }
 }

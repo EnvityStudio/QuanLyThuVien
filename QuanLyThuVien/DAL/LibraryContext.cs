@@ -16,6 +16,7 @@ namespace QuanLyThuVien.DAL {
         public DbSet<Publisher> Publishers { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Book> Books { get; set; }
+        public DbSet<Order> Orders { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder) {
             base.OnModelCreating(modelBuilder);

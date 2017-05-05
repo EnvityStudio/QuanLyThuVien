@@ -1,6 +1,7 @@
 ﻿using QuanLyThuVien.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 
@@ -64,6 +65,14 @@ namespace QuanLyThuVien.DAL {
                 new Author {
                     FirstName = "Nam", LastName = "Cao", Gender = "male",
                     BirthDay = "1920", Country="VietNam", Bio = @"Trần Hữu Tri (1915—1951), commonly known by his pseudonym Nam Cao, was a Vietnamese short story writer and novelist. His works generally received high."
+                },
+                new Author {
+                    FirstName = "Murakari", LastName = "Takasi", Gender = "male",
+                    BirthDay = "1950", Country="Japan", Bio = @"A famous writter in Japan."
+                },
+                new Author {
+                    FirstName = "Nguyễn Nhật", LastName = "Ánh", Gender = "male",
+                    BirthDay = "1950", Country="VietNam", Bio = @"Nguyễn Nhật Ánh is a Vietnamese author who writes for teenagers and adults. He also works as a teacher, poet and correspondent. His works include approximately 24 short stories, 2 novel series and some collections of poems."
                 }
             };
             authors.ForEach(author => context.Authors.Add(author));
@@ -132,6 +141,34 @@ namespace QuanLyThuVien.DAL {
             };
             books.ForEach(book => context.Books.Add(book));
             context.SaveChanges();
+
+            var orders = new List<Order> {
+                new Order {
+                    UserID = 1, BookID = 1,
+                    BorrowedDate = 
+                    DateTime.ParseExact("24/01/2017", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                    ExpiredDate = 
+                    DateTime.ParseExact("24/02/2017", "dd/MM/yyyy", CultureInfo.InvariantCulture)
+                },
+                new Order {
+                    UserID = 1, BookID = 2,
+                    BorrowedDate = 
+                    DateTime.ParseExact("24/01/2017", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                    ExpiredDate = 
+                    DateTime.ParseExact("24/02/2017", "dd/MM/yyyy", CultureInfo.InvariantCulture)
+                },
+                new Order {
+                    UserID = 2, BookID = 3,
+                    BorrowedDate = 
+                    DateTime.ParseExact("30/01/2017", "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                    ExpiredDate = 
+                    DateTime.ParseExact("30/03/2017", "dd/MM/yyyy", CultureInfo.InvariantCulture)
+                }
+
+            };
+            orders.ForEach(order => context.Orders.Add(order));
+            context.SaveChanges();
+
 
             base.Seed(context);
         }
