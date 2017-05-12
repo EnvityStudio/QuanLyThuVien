@@ -31,7 +31,14 @@ namespace QuanLyThuVien.Controllers
 
         // GET Order Edit
         public ActionResult Edit(int? id) {
-            
+            var order = db.Orders.Find(id);
+            IEnumerable<SelectListItem> users = db.Users.Select(
+                    c => new SelectListItem { Value = c.ID.ToString(), Text = c.FirstName + " " + c.LastName});
+            IEnumerable<SelectListItem> books = db.Books.Select(
+                    b => new SelectListItem { Value = b.ID.ToString(), Text = b.Name});
+            ViewBag.Users = users ;
+            ViewBag.Books = books;
+            return View(order);
         }
 
         // POST Book edit
