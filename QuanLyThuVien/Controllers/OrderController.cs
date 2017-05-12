@@ -20,7 +20,13 @@ namespace QuanLyThuVien.Controllers
 
         // GET Order Create
         public ActionResult Create() {
-            
+            IEnumerable<SelectListItem> users = db.Users.Select(
+                    c => new SelectListItem { Value = c.ID.ToString(), Text = c.FirstName + " " + c.LastName});
+            IEnumerable<SelectListItem> books = db.Books.Select(
+                    b => new SelectListItem { Value = b.ID.ToString(), Text = b.Name});
+            ViewBag.Users = users ;
+            ViewBag.Books = books;
+            return View();
         }
 
         // POST Order Create
