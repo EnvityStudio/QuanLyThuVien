@@ -42,7 +42,8 @@ namespace QuanLyThuVien.Controllers
 
         // GET Delete
         public ActionResult Delete(int? id) {
-            
+            var order = db.Orders.Find(id);
+            return View(order);
         }
 
         // POST Book Delete
