@@ -15,7 +15,8 @@ namespace QuanLyThuVien.Controllers
         // GET: Order
         public ActionResult Index()
         {
-
+            var orders = db.Orders.ToList();
+            return View(orders);
         }
 
         // GET Order Create
