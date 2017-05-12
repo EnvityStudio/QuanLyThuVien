@@ -26,7 +26,15 @@ namespace QuanLyThuVien.Controllers
         // POST Order Create
         [HttpPost]
         public ActionResult Create(Order order, FormCollection form) {
-            
+            if (ModelState.IsValid) {
+                var UserID = Int32.Parse(form["Users"].ToString());
+                var BookID = Int32.Parse(form["Books"].ToString());
+                order.UserID = UserID;
+                order.BookID = BookID;
+                db.Orders.Add(order);
+                db.SaveChanges();
+            }
+            return RedirectToAction("Index");
         }
 
         // GET Order Edit
