@@ -48,7 +48,10 @@ namespace QuanLyThuVien.Controllers
         // POST Book Delete
         [HttpPost]
         public ActionResult Delete(int id) {
-            
+            var order = db.Orders.Find(id);
+            db.Orders.Remove(order);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
     }
