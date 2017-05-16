@@ -1,23 +1,35 @@
-﻿@model IEnumerable<QuanLyThuVien.Models.Category>
-
+﻿@model PagedList.IPagedList<QuanLyThuVien.Models.Category>
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "Index";
     ViewBag.UserName = Session["Name"];
     Layout = "~/Views/Shared/_AfterLoginLayoutPage.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Category</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+@using (Html.BeginForm("Index", "Category", FormMethod.Get))
+{
+    <p>
+        Search: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+}
+
 <table class="table">
     <tr>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.Name)
+        </th>*@
+        <th>
+            @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.NameSortParm, currentFitler = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Description)
+            Description
         </th>
         <th></th>
     </tr>
@@ -39,3 +51,9 @@
 }
 
 </table>
+<br />
+
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))

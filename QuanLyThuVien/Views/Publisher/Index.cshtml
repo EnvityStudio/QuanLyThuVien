@@ -1,4 +1,5 @@
-﻿@model IEnumerable<QuanLyThuVien.Models.Publisher>
+﻿@model PagedList.IPagedList<QuanLyThuVien.Models.Publisher>
+@using PagedList.Mvc;
 
 @{
     ViewBag.Title = "Index";
@@ -6,13 +7,24 @@
     Layout = "~/Views/Shared/_AfterLoginLayoutPage.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Publisher</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
+
+@* Search by name *@
+@using (Html.BeginForm("Index", "Publisher", FormMethod.Get))
+{
+    <p>
+        Search: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+}
+
+
 <table class="table">
-    <tr>
+    @*<tr>
         <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
@@ -25,6 +37,22 @@
         <th>
             @Html.DisplayNameFor(model => model.Intro)
         </th>
+        <th></th>
+    </tr>*@
+    <tr>
+        <th>
+            @Html.ActionLink("Name", "Index", new { sortOrder = ViewBag.UidSortParm, currentFitler = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            @Html.ActionLink("Address", "Index", new { sortOrder = ViewBag.NameSortParm, currentFitler = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            Phone
+        </th>
+        <th>
+            Intro
+        </th>
+
         <th></th>
     </tr>
 
@@ -50,3 +78,7 @@
 }
 
 </table>
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
