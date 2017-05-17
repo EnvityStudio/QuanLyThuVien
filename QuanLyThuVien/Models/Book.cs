@@ -29,6 +29,9 @@ namespace QuanLyThuVien.Models {
 
         public decimal Price { get; set; }
 
+        [DefaultValue("~/Content/img/default-book-icon.png")]
+        public string MdImage { get; set; }
+
         public virtual Publisher Publisher { get; set; }
 
         public virtual Category Category { get; set; }

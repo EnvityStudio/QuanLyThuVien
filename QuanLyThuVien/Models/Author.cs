@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
@@ -22,5 +23,8 @@ namespace QuanLyThuVien.Models {
         public string BirthDay { get; set; }
 
         public string Country { get; set; }
+
+        [DefaultValue("~/Content/img/default-author-icon.png")]
+        public string MdImage { get; set; }
     }
 }

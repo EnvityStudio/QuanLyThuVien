@@ -52,11 +52,13 @@ namespace QuanLyThuVien.DAL {
             var authors = new List<Author> {
                 new Author {
                     FirstName = "Viet Thanh", LastName = "Nguyen", Gender = "male",
-                    BirthDay = "1972", Country="VietNam", Bio = "Viet Thanh Nguyen is a Vietnamese American novelist. He is the Aerol Arnold Chair of English and Professor of English and American Studies and Ethnicity at the University of Southern California"
+                    BirthDay = "1972", Country="VietNam", Bio = "Viet Thanh Nguyen is a Vietnamese American novelist. He is the Aerol Arnold Chair of English and Professor of English and American Studies and Ethnicity at the University of Southern California",
+                    MdImage="http://www.vietlifemagazine.com/sites/default/files/artices/center_for_fiction_viet_with_award_for_first_novel.jpg"
                 },
                 new Author {
                     FirstName = "J.r", LastName = "Rowling", Gender = "female",
-                    BirthDay = "1970", Country="Bristain", Bio = @"Joanne 'Jo' Rowling, OBE, FRSL, pen names J. K. Rowling and Robert Galbraith, is a British novelist, screenwriter and film producer best known as the author of the Harry Potter fantasy series"
+                    BirthDay = "1970", Country="Bristain", Bio = @"Joanne 'Jo' Rowling, OBE, FRSL, pen names J. K. Rowling and Robert Galbraith, is a British novelist, screenwriter and film producer best known as the author of the Harry Potter fantasy series",
+                    MdImage="https://vignette4.wikia.nocookie.net/harrypotter/images/3/3e/JKRowling.jpg/revision/latest?cb=20151001174249"
                 },
                 new Author {
                     FirstName = "Tô", LastName = "Hoài", Gender = "male",
@@ -118,22 +120,22 @@ namespace QuanLyThuVien.DAL {
 
             var books = new List<Book> {
                 new Book {
-                    Name = "Tấm Cám", PublisherID = 1, CategoryID=3, AuthorID=1,  Description="Truyện cổ tích Việt Nam", Price=30000
+                    Name = "Tấm Cám", PublisherID = 1, CategoryID=3, AuthorID=1,  Description="Truyện cổ tích Việt Nam", Price=30000, MdImage="http://static.appstore.vn/e/uploads/app/TamCam.jpg"
                 },
                 new Book {
-                    Name = "Thạch sanh", PublisherID = 1, CategoryID=3, AuthorID=2, Description="Truyện cổ tích Việt Nam", Price=30000
+                    Name = "Thạch sanh", PublisherID = 1, CategoryID=3, AuthorID=2, Description="Truyện cổ tích Việt Nam", Price=30000, MdImage="http://static.appstore.vn/e/uploads/app/TamCam.jpg"
                 },
                 new Book {
-                    Name = "War and Peace", PublisherID = 2, CategoryID=2 , AuthorID=2, Description="Truyện kinh điển văn học Nga", Price=180000
+                    Name = "War and Peace", PublisherID = 2, CategoryID=2 , AuthorID=2, Description="Truyện kinh điển văn học Nga", Price=180000, MdImage="http://static.appstore.vn/e/uploads/app/TamCam.jpg"
                 },
                 new Book {
-                    Name = "Catcher in the rye", PublisherID = 2, CategoryID=2, AuthorID=3, Description="Truyện lãng mạn", Price=50000
+                    Name = "Catcher in the rye", PublisherID = 2, CategoryID=2, AuthorID=3, Description="Truyện lãng mạn", Price=50000, MdImage="http://static.appstore.vn/e/uploads/app/TamCam.jpg"
                 },
                 new Book {
-                    Name = "AQZ", PublisherID = 1, CategoryID=4, AuthorID=2 ,Description="A classic book of Africa", Price=130000
+                    Name = "AQZ", PublisherID = 1, CategoryID=4, AuthorID=2 ,Description="A classic book of Africa", Price=130000, MdImage="http://static.appstore.vn/e/uploads/app/TamCam.jpg"
                 },
                 new Book {
-                    Name = "Dế mèn phưu lưu ký", PublisherID = 2, CategoryID=2 , AuthorID=2 ,  Description="Truyện thiếu nhi của nhà văn Tô Hoài", Price=23000
+                    Name = "Dế mèn phưu lưu ký", PublisherID = 2, CategoryID=2 , AuthorID=2 ,  Description="Truyện thiếu nhi của nhà văn Tô Hoài", Price=23000, MdImage="http://static.appstore.vn/e/uploads/app/TamCam.jpg"
                 },
                 new Book {
                     Name = "1Q94", PublisherID = 2, CategoryID=6,  AuthorID=3, Description="Murakami", Price=230000

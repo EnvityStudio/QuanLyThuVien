@@ -46,6 +46,9 @@
 
     <tr>
         <th>
+            @Html.ActionLink("MdImage", "Index")
+        </th>
+        <th>
             @Html.ActionLink("First Name", "Index", new { sortOrder = ViewBag.FirstNameSortParm, currentFitler = ViewBag.CurrentFilter })
         </th>
         <th>
@@ -68,6 +71,9 @@
 
 @foreach (var item in Model) {
     <tr>
+        <td>
+            <img src="@item.MdImage" style="height:60px; width:40px"/>
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.FirstName)
         </td>
