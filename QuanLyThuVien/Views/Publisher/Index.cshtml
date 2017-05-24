@@ -68,7 +68,14 @@
             @Html.DisplayFor(modelItem => item.Phone)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Intro)
+            @{ 
+                var shortIntro = item.Intro;
+                if (item.Intro.Length > 150) {
+                    shortIntro = item.Intro.Substring(0, 150);
+                    shortIntro = shortIntro + "...";
+                }
+            }
+            @Html.DisplayFor(modelItem => shortIntro)
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
@@ -78,7 +85,7 @@
 }
 
 </table>
-Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-
-@Html.PagedListPager(Model, page => Url.Action("Index",
-    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+<div style="position: fixed; bottom: 0">
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+</div>

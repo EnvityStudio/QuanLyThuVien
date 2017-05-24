@@ -84,7 +84,14 @@
             @Html.DisplayFor(modelItem => item.Gender)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Bio)
+            @{ 
+                var shortBio = item.Bio;
+                if (item.Bio.Length > 150) {
+                    shortBio = item.Bio.Substring(0, 150);
+                    shortBio = shortBio + "...";
+                }
+            }
+            @Html.DisplayFor(modelItem => shortBio)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.BirthDay)
@@ -101,7 +108,7 @@
 
 </table>
 
-Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-
-@Html.PagedListPager(Model, page => Url.Action("Index",
-    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+<div style="position: fixed; bottom: 0">
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+        new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+</div>

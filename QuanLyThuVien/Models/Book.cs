@@ -29,7 +29,7 @@ namespace QuanLyThuVien.Models {
 
         public decimal Price { get; set; }
 
-        [DefaultValue("~/Content/img/default-book-icon.png")]
+        [DefaultValue("http://www.mppuk.com/themes/shapehq/img/sample-icon-2.png")]
         public string MdImage { get; set; }
 
         public virtual Publisher Publisher { get; set; }

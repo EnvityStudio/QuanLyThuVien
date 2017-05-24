@@ -22,7 +22,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.PublisherID, "Publisher", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("publishers", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("PublisherClass", (SelectList)ViewData["Publisher"], htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.PublisherID, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -30,7 +30,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.CategoryID, "Category", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("categories", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("CategoryClass", (SelectList)ViewBag.Category, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -38,7 +38,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.AuthorID , "Author", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("authors", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("AuthorClass", (SelectList)ViewData["Author"], htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.AuthorID , "", new { @class = "text-danger" })
             </div>
         </div>
@@ -61,8 +61,8 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+            <div class="col-md-10 ">
+                <textarea name="Description" cols="40" rows="5" class="custom-large-textarea form-control">@Model.Description</textarea>
                 @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -80,5 +80,6 @@
 </div>
 
 @section Scripts {
+    <link href="~/Content/custom.css" rel="stylesheet" />
     @Scripts.Render("~/bundles/jqueryval")
 }

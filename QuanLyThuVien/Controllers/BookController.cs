@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using QuanLyThuVien.ViewModels;
 using PagedList;
+using QuanLyThuVien.ViewModels.Book;
 
 namespace QuanLyThuVien.Controllers {
     public class BookController : Controller {
@@ -112,19 +113,41 @@ namespace QuanLyThuVien.Controllers {
             }
             return RedirectToAction("Index", "Book");
         }
+        // GET Book Edit from ViewModel
+        public ActionResult EditViewModel(int? id) {
+            var book = db.Books.Find(id);
+            var categories = db.Categories.ToList();
+            var categoriesModel = new BookViewModel {
+                CategoryID = book.CategoryID,
+                Categories = categories.Select(x => new SelectListItem {
+                    Value = x.ID.ToString(),
+                    Text = x.Name.ToString()
+                })
+            };
+            ViewBag.categories = categoriesModel;
+            return View(book);
+        }
 
         // GET Book Edit
         public ActionResult Edit(int? id) {
             var book = db.Books.Find(id);
-            IEnumerable<SelectListItem> categories = db.Categories.Select(
-                    c => new SelectListItem { Value = c.ID.ToString(), Text = c.Name});
-            IEnumerable<SelectListItem> publishers = db.Publishers.Select(
-                    p => new SelectListItem { Value = p.ID.ToString(), Text = p.Name});
-            IEnumerable<SelectListItem> authors = db.Authors.Select(
-                    a => new SelectListItem { Value = a.ID.ToString(), Text = a.FirstName + " " + a.LastName });
-            ViewBag.categories = categories;
-            ViewBag.publishers = publishers;
-            ViewBag.authors = authors;
+
+            var categories = db.Categories.ToList();
+            var publishers = db.Publishers.ToList();
+            var authors = db.Authors.ToList();
+
+            var selectListCategory = new SelectList(categories, "Id", "Name", book.CategoryID); 
+            var selectListPublisher = new SelectList(publishers, "Id", "Name", book.PublisherID); 
+            var selectListAuthor = new SelectList(authors, "Id", "FirstName", book.AuthorID);
+
+            ViewData["Category"] = selectListCategory;
+            ViewData["Publisher"] = selectListPublisher;
+            ViewData["Author"] = selectListAuthor;
+
+            ViewBag.Category = selectListCategory;
+            ViewBag.Publisher = selectListPublisher;
+            ViewBag.Author = selectListAuthor;
+
             return View(book);
         }
 
@@ -132,9 +155,9 @@ namespace QuanLyThuVien.Controllers {
         [HttpPost]
         public ActionResult Edit(Book book, FormCollection form) {
             if (ModelState.IsValid) {
-                var categoryID = Int32.Parse(form["categories"].ToString());
-                var publisherID = Int32.Parse(form["publishers"].ToString());
-                var authorID = Int32.Parse(form["authors"].ToString());
+                var categoryID = Int32.Parse(form["CategoryClass"].ToString());
+                var publisherID = Int32.Parse(form["PublisherClass"].ToString());
+                var authorID = Int32.Parse(form["AuthorClass"].ToString());
                 book.CategoryID = categoryID;
                 book.PublisherID = publisherID;
                 book.AuthorID = authorID;

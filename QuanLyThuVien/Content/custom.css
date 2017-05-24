@@ -1,0 +1,7 @@
+﻿body {
+}
+
+.custom-large-textarea {
+    max-width: 600px;
+    height: 100px;
+}
