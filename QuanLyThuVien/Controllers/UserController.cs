@@ -67,7 +67,7 @@ namespace QuanLyThuVien.Controllers
             }
 
 
-            int pageSize = 3;
+            int pageSize = 5;
             int pageNumber = (page ?? 1);
 
             var users = db.Users.ToList();

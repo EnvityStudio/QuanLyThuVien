@@ -76,7 +76,7 @@ namespace QuanLyThuVien.Controllers {
                     break;
             }
 
-            int pageSize = 5;
+            int pageSize = 4;
             int pageNumber = (page ?? 1);
             return View(libs.ToPagedList(pageNumber, pageSize));
         }
