@@ -84,15 +84,7 @@ namespace QuanLyThuVien.Controllers
         // POST: User Create
         [HttpPost]
         public ActionResult Create(User user) {
-            if (ModelState.IsValid) {
-                using (LibraryContext db = new LibraryContext()) {
-                    db.Users.Add(user);
-                    db.SaveChanges();
-                }
-                ModelState.Clear();
-                ViewBag.Message = user.FirstName+ " " + user.LastName + "successfully";
-            }
-            return RedirectToAction("Index", "User");
+            
         }
 
         // GET User Edit
