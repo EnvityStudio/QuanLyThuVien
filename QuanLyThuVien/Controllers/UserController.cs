@@ -16,7 +16,64 @@ namespace QuanLyThuVien.Controllers
         // GET: User
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-        
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.FirstNameSortParm = String.IsNullOrEmpty(sortOrder) ? "firstname_desc" : "";
+            ViewBag.LastNameSortParm = String.IsNullOrEmpty(sortOrder) ? "lastname_desc" : "";
+            ViewBag.UidSortParm = String.IsNullOrEmpty(sortOrder) ? "uid_desc" : "";
+
+
+            /*  
+              If there are no texts to search, page number will set to one
+           */
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+            ViewBag.CurrentFilter = searchString;
+            /*  
+                By using LINQ to select a list of librarians
+             */
+            var libs = from l in db.Users
+                       select l;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                libs = libs.Where(
+                    l => l.UID.Contains(searchString)
+                    || l.FirstName.Contains(searchString)
+                    || l.FirstName.Contains(searchString)
+                    || l.LastName.Contains(searchString)
+                    || l.Email.Contains(searchString)
+                    || l.Address.Contains(searchString)
+                    || l.Phone.Contains(searchString)
+                );
+            }
+
+            switch (sortOrder)
+            {
+                case "firstname_desc":
+                    libs = libs.OrderByDescending(l => l.FirstName);
+                    break;
+                case "lastname_desc":
+                    libs = libs.OrderByDescending(l => l.LastName);
+                    break;
+                case "uid_desc":
+                    libs = libs.OrderByDescending(l => l.UID);
+                    break;
+                default:
+                    libs = libs.OrderBy(l => l.LastName);
+                    break;
+            }
+
+
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+
+            var users = db.Users.ToList();
+            return View(libs.ToPagedList(pageNumber, pageSize));
         }
 
         // GET: User Create
