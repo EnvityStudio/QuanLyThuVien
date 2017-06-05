@@ -1,4 +1,13 @@
-﻿
+﻿@model QuanLyThuVien.Models.Category
+
+@{
+    ViewBag.Title = "Edit";
+    ViewBag.UserName = Session["Name"];
+    Layout = "~/Views/Shared/_AfterLoginLayoutPage.cshtml";
+}
+
+<h2>Edit</h2>
+
 
 @using (Html.BeginForm())
 {
